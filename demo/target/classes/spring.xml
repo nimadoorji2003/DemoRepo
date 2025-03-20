@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="alien" class="bt.edu.gcit.Alien" autowire="byType"> <!--if scope is prototype no object are created even if its registered in container. object is created only when using getBean.And if two objects are called two same object will be created -->
+        <!-- via setter -->
+        <!-- The DI happens only after the object is created where the setter is also called -->
+        <!-- <property name="age" value="101"></property> --> <!-- Primitive value -->
+        <property name="comp">
+            <bean id="comp" class="bt.edu.gcit.Laptop"></bean>
+        </property> <!-- Reference value (Primitive reference from laptop) -->
+
+        <!--via constructor-->
+        <!-- The DI happens when the object is created -->
+        <!--constructor arg need to be in sequence similar tp constructor paramenter but if you use the type ='bt.edu.gcit.Laptop' in your constructor arg you dont have to write it in sequence -->
+        <!--<constructor-arg  type ='bt.edu.gcit.Laptop' value = "32"/>-->
+        <!-- <constructor-arg index ="2" value = "7000"/> --> <!--assigning 7000 to salary because index is given-->
+        <!-- <constructor-arg index ="0" value = "32"/> -->
+        <!-- <constructor-arg ref = "laptop"/> -->
+        <!-- <constructor-arg  ref = "desktop"/> -->
+    </bean>
+    <!--Default scope is singleton so object is created when container is created. And even if two objects are called to be created  only one object will be created -->
+    <!-- <bean id="comp" class="bt.edu.gcit.Laptop" lazy-init="true"> --> <!--lazy-init is used to create object only when it is called -->
+    <!-- </bean> -->
+    <!-- <bean id="comp1" class="bt.edu.gcit.Desktop" primary="true"> --> <!--primary is used to tell which object to be created first if there are multiple objects of same type -->
+    <!-- </bean> -->
+</beans>
